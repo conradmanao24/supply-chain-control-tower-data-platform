@@ -8,7 +8,7 @@ Validated repository state: `69478f9`
 
 The clean clone used separate SQL Server, PostgreSQL, Airflow metadata, and application runtime containers and volumes. No existing project database volume was reused.
 
-The frozen portfolio baseline was linked locally into the clone for the reproduction exercise and validated using its pinned size and SHA-256 metadata.
+The reproduction exercise used the checksum-pinned frozen portfolio baseline. Public clones obtain the same artifact through the `v1.0-data-baseline` GitHub Release when it is not already present locally.
 
 ## Bootstrap
 
@@ -88,4 +88,4 @@ These corrections affected bootstrap/reproducibility behavior and did not change
 
 ## Reproduction result
 
-The backend/data-platform state was recreated from empty Docker volumes when the checksum-pinned frozen baseline was supplied locally.
+The backend/data-platform state was recreated from empty Docker volumes using the checksum-pinned frozen baseline.

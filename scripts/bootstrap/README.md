@@ -15,7 +15,7 @@ Pinned verification:
 - bytes: `1662111744`
 - SHA-256: `1F779A53D9AE1E5B90F2C62BA74D3E48E5FED0F75096E5EC798A09ABF04DEE30`
 
-The backup is intentionally excluded from Git.
+The backup is intentionally excluded from Git history. When it is absent locally, the bootstrap downloads it from the `v1.0-data-baseline` GitHub Release and verifies its size, SQL Server backup signature, and SHA-256 before restore.
 
 After copying `.env.example` to `.env`, set local database/service passwords and generate the Airflow secrets before bootstrap.
 
@@ -100,7 +100,8 @@ This source-only path does **not** by itself provision the analytical warehouse,
 ## Files
 
 - `bootstrap-platform.ps1` - final frozen-baseline platform bootstrap
-- `restore-portfolio-baseline.ps1` - checksum-backed frozen baseline restore
+- `download-portfolio-baseline.ps1` - GitHub Release download + signature/size/SHA-256 validation
+- `restore-portfolio-baseline.ps1` - auto-download + checksum-backed frozen baseline restore
 - `provision-source-integration.ps1` - idempotent SQL Server project integration
 - `provision-warehouse.ps1` - PostgreSQL pre-load/post-load migrations
 - `download-wwi.ps1` - official Microsoft source acquisition
@@ -112,6 +113,6 @@ This source-only path does **not** by itself provision the analytical warehouse,
 
 ## Public artifact boundary
 
-The frozen 2026 baseline is not committed to Git. A public checksum-backed hosting location must be published separately before an external clone can reproduce the exact final 2026 state without running the longer source-simulation path.
+The frozen 2026 baseline is not committed to Git history. It is published separately as the `v1.0-data-baseline` GitHub Release asset and is downloaded automatically by the full platform bootstrap when absent.
 
-Microsoft WideWorldImporters remains an external source dependency. See `THIRD_PARTY_NOTICES.md`.
+Microsoft WideWorldImporters remains the upstream sample-data source. See `THIRD_PARTY_NOTICES.md` and `THIRD_PARTY_LICENSES/MICROSOFT-SQL-SERVER-SAMPLES-MIT.txt`.

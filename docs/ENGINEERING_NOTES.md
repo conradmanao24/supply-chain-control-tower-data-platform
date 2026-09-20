@@ -134,4 +134,4 @@ Evidence:
 
 ## Distribution Note
 
-The frozen SQL Server portfolio baseline is intentionally excluded from Git history because of its size. The source bootstrap and simulation path remain documented in the repository.
+The frozen SQL Server portfolio baseline is intentionally excluded from Git history because of its size and is distributed through the `v1.0-data-baseline` GitHub Release. The source bootstrap and simulation path remain documented in the repository.

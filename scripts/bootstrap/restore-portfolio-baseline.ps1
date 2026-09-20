@@ -14,7 +14,14 @@ $expectedSize = if ([string]::IsNullOrWhiteSpace($env:WWI_BASELINE_SIZE_BYTES)) 
 $expectedHash = if ([string]::IsNullOrWhiteSpace($env:WWI_BASELINE_SHA256)) { '1F779A53D9AE1E5B90F2C62BA74D3E48E5FED0F75096E5EC798A09ABF04DEE30' } else { $env:WWI_BASELINE_SHA256.ToUpperInvariant() }
 
 $localPath = Join-Path (Join-Path $projectRoot 'data\baselines') ($baselineFile -replace '/', '\')
-if (-not (Test-Path -LiteralPath $localPath)) { throw "Frozen portfolio baseline is missing: $localPath" }
+if (-not (Test-Path -LiteralPath $localPath)) {
+    Write-Host 'Frozen portfolio baseline is not present locally.'
+    Write-Host 'Downloading the checksum-pinned 2026 baseline from the project GitHub Release...'
+    & "$PSScriptRoot\download-portfolio-baseline.ps1"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Portfolio baseline download failed with exit code $LASTEXITCODE."
+    }
+}
 
 $file = Get-Item -LiteralPath $localPath
 if ($file.Length -ne $expectedSize) { throw "Baseline size mismatch: expected $expectedSize bytes, found $($file.Length)." }

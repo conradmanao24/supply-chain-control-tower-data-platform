@@ -120,7 +120,7 @@ Local frozen backup:
 - SHA-256: `1F779A53D9AE1E5B90F2C62BA74D3E48E5FED0F75096E5EC798A09ABF04DEE30`
 - `RESTORE VERIFYONLY WITH CHECKSUM` — **PASS**
 
-Because the full compressed baseline is only 1.548 GiB, historical trimming is unnecessary for the selected project baseline. The baseline remains local-only until public artifact hosting and redistribution checks are completed later in the portfolio lifecycle.
+Because the full compressed baseline is 1.548 GiB, historical trimming is unnecessary for the selected project baseline. The frozen baseline is distributed separately from Git history through the project's `v1.0-data-baseline` GitHub Release.
 
 ## Baseline distribution decision
 

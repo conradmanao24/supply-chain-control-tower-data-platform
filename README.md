@@ -230,11 +230,15 @@ The final portfolio runtime uses the checksum-pinned frozen baseline:
 data/baselines/full-master/wwi-full-master-2026-09-15.bak
 ```
 
-The baseline is intentionally excluded from Git because of its size. When that artifact is available locally, bootstrap the complete backend/data platform with:
+The baseline is intentionally excluded from Git history because of its size. The full bootstrap downloads it automatically from the project's `v1.0-data-baseline` GitHub Release when it is not already present, then validates its size, SQL Server backup signature, and SHA-256 before restore.
+
+Run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/bootstrap/bootstrap-platform.ps1
 ```
+
+The baseline download is approximately **1.55 GiB** on a fresh clone.
 
 Start the frontend separately:
 

@@ -169,7 +169,7 @@ Airflow      http://127.0.0.1:28080
 
 ## Baseline Distribution
 
-Backups and runtime data are excluded from Git history. The exact precomputed **2026-09-15 portfolio baseline** is a separate local artifact. A clone can use the documented source bootstrap and simulation path; exact reproduction from the frozen state additionally requires the checksum-pinned baseline artifact.
+Backups and runtime data are excluded from Git history. The exact precomputed **2026-09-15 portfolio baseline** is distributed separately as the `v1.0-data-baseline` GitHub Release asset. The full bootstrap downloads and verifies that artifact automatically when it is not already present locally.
 
 ## Repository Layout
 
