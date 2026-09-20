@@ -1,0 +1,10 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: 55555555-5555-5555-5555-555555555555
+event: update
+data: {"event_id" : "55555555-5555-5555-5555-555555555555", "event_type" : "telemetry.coldroom.batch_recorded", "entity_type" : "coldroom_sensor", "operation" : "INSERT", "processing_result" : "phase11_cold_chain_sse_proof"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 0, "rule_id" : "coldroom.stale", "domain" : "cold_chain", "entity_type" : "coldroom_sensor", "entity_id" : "phase11-proof", "severity" : "warning", "status" : "open"}
+

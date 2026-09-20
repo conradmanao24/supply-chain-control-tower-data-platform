@@ -1,0 +1,261 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: Calendar dimension spanning all relevant analytical and operational dates in staging.
+    columns:
+      - name: date_key
+        data_tests: [unique, not_null]
+      - name: calendar_date
+        data_tests: [unique, not_null]
+
+  - name: dim_product
+    description: Business-attribute-driven SCD product dimension. Technical CustomFields/Tags changes do not create versions.
+    columns:
+      - name: product_key
+        data_tests: [unique, not_null]
+      - name: stock_item_id
+        data_tests: [not_null]
+      - name: is_current
+        data_tests: [not_null]
+
+  - name: dim_customer
+    description: SCD2 customer dimension. Baseline semantic history is driven by CreditLimit changes; stable descriptors are repeated across versions.
+    columns:
+      - name: customer_key
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests: [not_null]
+      - name: customer_name
+        data_tests: [not_null]
+      - name: is_current
+        data_tests: [not_null]
+
+  - name: dim_supplier
+    description: Business-attribute-driven SCD supplier dimension.
+    columns:
+      - name: supplier_key
+        data_tests: [unique, not_null]
+      - name: supplier_id
+        data_tests: [not_null]
+
+  - name: dim_employee
+    description: Business-attribute-driven SCD employee dimension.
+    columns:
+      - name: employee_key
+        data_tests: [unique, not_null]
+      - name: person_id
+        data_tests: [not_null]
+
+  - name: dim_geography
+    columns:
+      - name: geography_key
+        data_tests: [unique, not_null]
+      - name: city_id
+        data_tests: [unique, not_null]
+
+  - name: dim_delivery_method
+    columns:
+      - name: delivery_method_key
+        data_tests: [unique, not_null]
+      - name: delivery_method_id
+        data_tests: [unique, not_null]
+
+  - name: dim_transaction_type
+    columns:
+      - name: transaction_type_key
+        data_tests: [unique, not_null]
+      - name: transaction_type_id
+        data_tests: [unique, not_null]
+
+  - name: dim_package_type
+    columns:
+      - name: package_type_key
+        data_tests: [unique, not_null]
+      - name: package_type_id
+        data_tests: [unique, not_null]
+
+  - name: bridge_product_stock_group
+    description: Current many-to-many bridge between product and WWI stock group.
+    columns:
+      - name: product_stock_group_key
+        data_tests: [unique, not_null]
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_key
+
+  - name: fact_order_line
+    description: One row per WWI order and stock-item combination; source audit proved this composite grain unique.
+    columns:
+      - name: order_line_key
+        data_tests: [unique, not_null]
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_product'), field: product_key}
+      - name: customer_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: customer_key}
+      - name: salesperson_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_employee'), field: employee_key}
+      - name: geography_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_geography'), field: geography_key}
+      - name: package_type_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_package_type'), field: package_type_key}
+      - name: order_date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_date'), field: date_key}
+
+  - name: fact_sales_line
+    description: One row per WWI invoice and stock-item combination; source audit proved this composite grain unique.
+    columns:
+      - name: sales_line_key
+        data_tests: [unique, not_null]
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_product'), field: product_key}
+      - name: customer_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: customer_key}
+      - name: bill_to_customer_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: customer_key}
+      - name: salesperson_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_employee'), field: employee_key}
+      - name: invoice_date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_date'), field: date_key}
+
+  - name: fact_inventory_movement
+    description: One row per stock-item transaction.
+    columns:
+      - name: inventory_movement_key
+        data_tests: [unique, not_null]
+      - name: stock_item_transaction_id
+        data_tests: [unique, not_null]
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_product'), field: product_key}
+      - name: transaction_type_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_transaction_type'), field: transaction_type_key}
+      - name: date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_date'), field: date_key}
+
+  - name: fact_purchase_order_line
+    description: One row per purchase order and stock-item combination.
+    columns:
+      - name: purchase_order_line_key
+        data_tests: [unique, not_null]
+      - name: product_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_product'), field: product_key}
+      - name: supplier_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_supplier'), field: supplier_key}
+      - name: order_date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_date'), field: date_key}
+
+  - name: fact_delivery_event
+    description: One row per JSON event in Sales.Invoices ReturnedDeliveryData.
+    columns:
+      - name: delivery_event_key
+        data_tests: [unique, not_null]
+      - name: event_time
+        data_tests: [not_null]
+      - name: event_type
+        data_tests: [not_null]
+      - name: customer_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: customer_key}
+      - name: delivery_method_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_delivery_method'), field: delivery_method_key}
+      - name: event_date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_date'), field: date_key}
+
+  - name: fact_customer_transaction
+    description: One row per WWI customer transaction.
+    columns:
+      - name: customer_transaction_key
+        data_tests: [unique, not_null]
+      - name: customer_transaction_id
+        data_tests: [unique, not_null]
+      - name: customer_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: customer_key}
+      - name: transaction_type_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_transaction_type'), field: transaction_type_key}
+
+  - name: fact_supplier_transaction
+    description: One row per WWI supplier transaction.
+    columns:
+      - name: supplier_transaction_key
+        data_tests: [unique, not_null]
+      - name: supplier_transaction_id
+        data_tests: [unique, not_null]
+      - name: supplier_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_supplier'), field: supplier_key}
+      - name: transaction_type_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_transaction_type'), field: transaction_type_key}

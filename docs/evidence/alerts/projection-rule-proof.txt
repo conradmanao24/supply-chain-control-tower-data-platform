@@ -1,0 +1,70 @@
+﻿{
+  "today_utc": "2026-09-17",
+  "results": {
+    "inventory_negative": {
+      "inventory.negative_stock": "opened",
+      "inventory.reorder": "clear",
+      "inventory.target_watch": "clear"
+    },
+    "inventory_reorder": {
+      "inventory.negative_stock": "clear",
+      "inventory.reorder": "opened",
+      "inventory.target_watch": "clear"
+    },
+    "inventory_watch": {
+      "inventory.negative_stock": "clear",
+      "inventory.reorder": "clear",
+      "inventory.target_watch": "opened"
+    },
+    "fulfillment_overdue": {
+      "fulfillment.overdue": "opened",
+      "fulfillment.due_today": "clear",
+      "fulfillment.backorder": "clear"
+    },
+    "fulfillment_due_today": {
+      "fulfillment.overdue": "clear",
+      "fulfillment.due_today": "opened",
+      "fulfillment.backorder": "clear"
+    },
+    "fulfillment_backorder": {
+      "fulfillment.overdue": "clear",
+      "fulfillment.due_today": "clear",
+      "fulfillment.backorder": "opened"
+    },
+    "delivery_overdue": {
+      "delivery.overdue": "opened",
+      "delivery.due_today": "clear",
+      "delivery.receiver_not_present": "opened"
+    },
+    "delivery_due_today": {
+      "delivery.overdue": "clear",
+      "delivery.due_today": "opened",
+      "delivery.receiver_not_present": "clear"
+    },
+    "procurement_overdue": {
+      "procurement.overdue_under_received": "opened",
+      "procurement.due_today_under_received": "clear"
+    },
+    "procurement_due_today": {
+      "procurement.overdue_under_received": "clear",
+      "procurement.due_today_under_received": "opened"
+    }
+  },
+  "opened_rules": [
+    "delivery.due_today",
+    "delivery.overdue",
+    "delivery.receiver_not_present",
+    "fulfillment.backorder",
+    "fulfillment.due_today",
+    "fulfillment.overdue",
+    "inventory.negative_stock",
+    "inventory.reorder",
+    "inventory.target_watch",
+    "procurement.due_today_under_received",
+    "procurement.overdue_under_received"
+  ],
+  "active_duplicate_rows": [],
+  "proof_alert_count": 11
+}
+
+

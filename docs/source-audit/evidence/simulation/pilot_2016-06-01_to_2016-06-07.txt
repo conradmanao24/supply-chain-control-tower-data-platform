@@ -1,0 +1,49 @@
+SOURCE SIMULATION CONTROLLED SIMULATION PILOT
+Window: 2016-06-01 through 2016-06-07
+Functional result: PASS
+Full catch-up: NOT STARTED
+Runtime: NOT MEASURED (execution sequence did not preserve a trustworthy end-to-end runtime value)
+
+BASELINE (source audit)
+Warehouse.ColdRoomTemperatures_Archive=3654736
+Warehouse.StockItemTransactions=236667
+Sales.OrderLines=231412
+Sales.InvoiceLines=228265
+Sales.CustomerTransactions=97147
+Sales.Orders=73595
+Sales.Invoices=70510
+Warehouse.VehicleTemperatures=65998
+Purchasing.PurchaseOrderLines=8367
+Purchasing.SupplierTransactions=2438
+Purchasing.PurchaseOrders=2074
+
+POST-PILOT
+Warehouse.ColdRoomTemperatures_Archive=3810228 delta=+155492
+Warehouse.StockItemTransactions=237964 delta=+1297
+Sales.OrderLines=232673 delta=+1261
+Sales.InvoiceLines=229511 delta=+1246
+Sales.CustomerTransactions=97677 delta=+530
+Sales.Orders=73996 delta=+401
+Sales.Invoices=70896 delta=+386
+Warehouse.VehicleTemperatures=68996 delta=+2998
+Purchasing.PurchaseOrderLines=8418 delta=+51
+Purchasing.SupplierTransactions=2452 delta=+14
+Purchasing.PurchaseOrders=2086 delta=+12
+
+MAX DATES
+Sales.Orders.OrderDate=2016-06-07
+Sales.Invoices.InvoiceDate=2016-06-07
+Purchasing.PurchaseOrders.OrderDate=2016-06-07
+Warehouse.StockItemTransactions.TransactionOccurredWhen=2016-06-07
+Warehouse.VehicleTemperatures.RecordedWhen=2016-06-07
+
+POST-RUN STATE
+temporal_current_tables=17
+temporal_history_tables=17
+leftover_dataload_triggers=0
+disabled_foreign_keys=0
+untrusted_foreign_keys=0
+simulation_process_running=false
+
+CAPACITY OBSERVATION
+ColdRoomTemperatures_Archive grew by 155492 rows in seven days (~22213/day). A simple linear extrapolation across the remaining ~3751 days to 2026-09-14 is ~83.3M additional cold-room archive rows. This is an estimate, not measured future output.

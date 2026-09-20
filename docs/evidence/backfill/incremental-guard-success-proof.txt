@@ -1,0 +1,6 @@
+﻿BEGIN RunWindow(airflow_run_id='phase9_incremental_guard_success_proof', pipeline_name='phase9_incremental_guard_test', start_cutoff=datetime.datetime(2026, 8, 1, 0, 0, tzinfo=datetime.timezone.utc), end_cutoff=datetime.datetime(2026, 8, 2, 0, 0, tzinfo=datetime.timezone.utc), status='running')
+GUARD_DURING ('incremental', 'phase9_incremental_guard_success_proof')
+GUARD_AFTER (None, None)
+TEST_WATERMARK_AFTER 2026-08-01 00:00:00+00:00
+RUN_STATUS failed
+CLEANUP PASS

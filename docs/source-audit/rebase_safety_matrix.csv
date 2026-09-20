@@ -1,0 +1,13 @@
+area,verified_fact,risk,rebase_rule
+Date inventory,175 date/time columns across 48 user tables,Blanket update can touch entire source,Do not blanket-shift every value
+Business chronology,Core transactional dates end 2016-05-31,Simulation would otherwise span about 10 years,Shift approved business chronology +10 years
+Temporal current tables,17 system-versioned tables,Generated period columns require special handling,Disable versioning/period in dedicated rebase routine
+Temporal history,17 history tables with 3656381 rows,Large write volume and consistency risk,Update only with paired temporal handling
+Temporal sentinel,Current ValidTo uses 9999-12-31 23:59:59.9999999,Blind shift is invalid,Preserve sentinel unchanged
+Countries exception,CountryID 222 Turkey to Türkiye changed at 2022-10-07,Blind +10 would create 2032 future metadata,Handle this temporal pair explicitly
+LastEditedWhen,Existing historical values plus SYSDATETIME defaults,Historical/current chronology can diverge,Shift existing in-scope values and keep runtime defaults for new activity
+Cold-room archive,3654736 rows,Heavy one-time rewrite if included,Decide telemetry scope before mutation
+Vehicle temperatures,65998 memory-optimized rows,Extra write cost and special engine behavior,Decide telemetry scope before mutation
+Simulation start,MAX Sales.Orders.OrderDate plus one day,Depends on rebased OrderDate,Target MAX OrderDate equals 2026-05-31
+Simulation end,Yesterday from SYSDATETIME(),Runtime-date dependent,Accept as official workload behavior
+2016 one-time events,StockItemID 220-227 and two SpecialDeals already exist,Replaying would duplicate baseline history,Do not replay and preserve/shift baseline state

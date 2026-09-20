@@ -1,0 +1,59 @@
+﻿=== RUNTIME ===
+NAME                                              IMAGE                                        COMMAND                  SERVICE              CREATED             STATUS                   PORTS
+supply-chain-control-tower-airflow-api-server-1   supply-chain-control-tower-airflow:3.3.1     "/usr/bin/dumb-init ΓÇª"   airflow-api-server   19 hours ago        Up 3 hours (healthy)     127.0.0.1:28080->8080/tcp
+supply-chain-control-tower-airflow-scheduler-1    supply-chain-control-tower-airflow:3.3.1     "/usr/bin/dumb-init ΓÇª"   airflow-scheduler    19 hours ago        Up 3 hours (healthy)     8080/tcp
+supply-chain-control-tower-realtime-api-1         supply-chain-control-tower-airflow:3.3.1     "/bin/bash -c 'uvicoΓÇª"   realtime-api         About an hour ago   Up 9 minutes (healthy)   127.0.0.1:18000->8000/tcp
+supply-chain-control-tower-realtime-consumer-1    supply-chain-control-tower-airflow:3.3.1     "/bin/bash -c 'pythoΓÇª"   realtime-consumer    42 minutes ago      Up 9 minutes             8080/tcp
+supply-chain-control-tower-warehouse-db-1         postgres:17.11-bookworm                      "docker-entrypoint.sΓÇª"   warehouse-db         21 hours ago        Up 3 hours (healthy)     127.0.0.1:15434->5432/tcp
+supply-chain-control-tower-wwi-sqlserver-1        mcr.microsoft.com/mssql/server:2022-latest   "/opt/mssql/bin/launΓÇª"   wwi-sqlserver        19 hours ago        Up 2 hours (healthy)     127.0.0.1:14333->1433/tcp
+
+=== ALERT STATE ===
+         activated_at          |   backlog_policy   
+-------------------------------+--------------------
+ 2026-09-17 11:35:59.143589+00 | event_touched_only
+(1 row)
+
+ alert_rows | active_alerts 
+------------+---------------
+          0 |             0
+(1 row)
+
+ duplicate_active_groups 
+-------------------------
+                       0
+(1 row)
+
+            rule_id            | enabled | severity |         parameters          
+-------------------------------+---------+----------+-----------------------------
+ coldroom.offline              | t       | critical | {"seconds": 120}
+ coldroom.stale                | t       | warning  | {"seconds": 60}
+ coldroom.temperature_critical | f       | critical | {"low": null, "high": null}
+ coldroom.temperature_warning  | f       | warning  | {"low": null, "high": null}
+(4 rows)
+
+ synthetic_sensor_rows 
+-----------------------
+                     0
+(1 row)
+
+
+=== BROKER ===
+IngressQueue ConsumerQueue TransmissionQueue DeadLetters ScheduledDeadlines
+------------ ------------- ----------------- ----------- ------------------
+0 0 0 0 0
+name is_receive_enabled is_enqueue_enabled is_activation_enabled
+---- ------------------ ------------------ ---------------------
+DeadlineTimerQueue 1 1 1
+EventConsumerQueue 1 1 0
+
+=== AIRFLOW PHASE7 PROOF RUN ===
+
+supply_chain_incremental_pipeline  phase7_platform_alert_noop_proof_20260917  success  
+2026-09-17T11:53:00.588415+00:00                             2026-09-17T11:53:01.205199+00:00  
+2026-09-17T11:53:06.607755+00:00
+
+
+
+=== API HEALTH ===
+{"status":"ok","database":"ok","sse_listener":"connected","subscribers":0,"listener_error":null}
+

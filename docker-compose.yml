@@ -1,0 +1,328 @@
+﻿name: supply-chain-control-tower
+
+x-airflow-common: &airflow-common
+  image: supply-chain-control-tower-airflow:${AIRFLOW_VERSION:-3.3.1}
+  build:
+    context: ./docker/airflow
+    dockerfile: Dockerfile
+    args:
+      AIRFLOW_VERSION: ${AIRFLOW_VERSION:-3.3.1}
+      PYTHON_VERSION: ${AIRFLOW_PYTHON_VERSION:-3.12}
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-api-server:8080/execution/
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${AIRFLOW_DB_USER}:${AIRFLOW_DB_PASSWORD}@airflow-db:5432/${AIRFLOW_DB_NAME}
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY}
+    AIRFLOW__API__SECRET_KEY: ${AIRFLOW_API_SECRET_KEY}
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET}
+    AIRFLOW__API_AUTH__JWT_AUDIENCE: supply-chain-control-tower-airflow
+    AIRFLOW__API_AUTH__JWT_ISSUER: supply-chain-control-tower-airflow
+    AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: ${AIRFLOW_ADMIN_USERNAME:-admin}:admin
+    AIRFLOW__API__INSTANCE_NAME: Supply Chain Control Tower Data Platform
+    AIRFLOW__SCHEDULER__CATCHUP_BY_DEFAULT: "false"
+    AIRFLOW__DAG_PROCESSOR__HEALTH_CHECK_THRESHOLD: "60"
+    PYTHONPATH: /opt/airflow/src
+    DWH_HOST: warehouse-db
+    DWH_PORT: "5432"
+    DWH_DB: ${DWH_DB}
+    DWH_USER: ${DWH_USER}
+    DWH_PASSWORD: ${DWH_PASSWORD}
+    DBT_BIN: /home/airflow/.dbt-venv/bin/dbt
+    DBT_PROJECT_DIR: /opt/airflow/dbt
+    DBT_PROFILES_DIR: /opt/airflow/dbt
+    DBT_LOG_PATH: /opt/airflow/dbt-runtime/logs
+    DBT_TARGET_PATH: /opt/airflow/dbt-runtime/target
+    WWI_HOST: wwi-sqlserver
+    WWI_PORT: "1433"
+    WWI_DATABASE: ${WWI_DATABASE}
+    WWI_SOURCE_USER: ${WWI_SOURCE_USER}
+    WWI_SOURCE_PASSWORD: ${WWI_SOURCE_PASSWORD}
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags:ro
+    - ./dbt:/opt/airflow/dbt:ro
+    - dbt_runtime:/opt/airflow/dbt-runtime
+    - ./src:/opt/airflow/src:ro
+    - airflow_logs:/opt/airflow/logs
+  depends_on:
+    dbt-runtime-init:
+      condition: service_completed_successfully
+    airflow-db:
+      condition: service_healthy
+    warehouse-db:
+      condition: service_healthy
+
+services:
+  wwi-sqlserver:
+    image: ${MSSQL_IMAGE:-mcr.microsoft.com/mssql/server:2022-latest}
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: ${MSSQL_PID:-Developer}
+      MSSQL_MEMORY_LIMIT_MB: ${MSSQL_MEMORY_LIMIT_MB:-3584}
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:${MSSQL_HOST_PORT:-14333}:1433"
+    volumes:
+      - wwi_sqlserver_data:/var/opt/mssql
+      - ./data/wwi:/var/opt/mssql/backup:ro
+      - ./data/baselines:/var/opt/mssql/baselines:ro
+      - ./sql/bootstrap:/opt/project/sql/bootstrap:ro
+      - ./sql/audit:/opt/project/sql/audit:ro
+      - ./sql/infrastructure:/opt/project/sql/infrastructure:ro
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          if [ -x /opt/mssql-tools18/bin/sqlcmd ]; then SQLCMD=/opt/mssql-tools18/bin/sqlcmd;
+          elif [ -x /opt/mssql-tools/bin/sqlcmd ]; then SQLCMD=/opt/mssql-tools/bin/sqlcmd;
+          else exit 1; fi;
+          $$SQLCMD -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 30s
+    stop_grace_period: 30s
+
+  source-simulator:
+    image: supply-chain-control-tower-airflow:${AIRFLOW_VERSION:-3.3.1}
+    entrypoint: /bin/bash
+    command: ["-c", "python /opt/airflow/src/simulation/runtime_source_simulator.py"]
+    environment:
+      PYTHONPATH: /opt/airflow/src
+      WWI_HOST: wwi-sqlserver
+      WWI_PORT: "1433"
+      WWI_DATABASE: ${WWI_DATABASE}
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in .env}
+      DWH_HOST: warehouse-db
+      DWH_PORT: "5432"
+      DWH_DB: ${DWH_DB}
+      DWH_USER: ${DWH_USER}
+      DWH_PASSWORD: ${DWH_PASSWORD}
+      SIMULATION_TIMEZONE: Asia/Jakarta
+      SIMULATION_POLL_SECONDS: "300"
+      SIMULATION_RETRY_SECONDS: "60"
+      SIMULATION_CURRENT_DAY_AFTER_HOUR: "20"
+      SIMULATION_CATCHUP_CHUNK_DAYS: "7"
+      SIMULATION_LIVE_ENABLED: "true"
+      SIMULATION_LIVE_HEARTBEAT_SECONDS: "300"
+      SIMULATION_LIVE_MAX_SLEEP_SECONDS: "5"
+      SIMULATION_COLDROOM_MIN_SECONDS: "10"
+      SIMULATION_COLDROOM_MAX_SECONDS: "25"
+      SIMULATION_VEHICLE_MIN_SECONDS: "45"
+      SIMULATION_VEHICLE_MAX_SECONDS: "120"
+      SIMULATION_ORDER_MIN_SECONDS: "480"
+      SIMULATION_ORDER_MAX_SECONDS: "1200"
+      SIMULATION_ORDER_PICK_MIN_SECONDS: "90"
+      SIMULATION_ORDER_PICK_MAX_SECONDS: "300"
+      SIMULATION_DELIVERY_CONFIRM_MIN_SECONDS: "120"
+      SIMULATION_DELIVERY_CONFIRM_MAX_SECONDS: "420"
+      SIMULATION_PROCUREMENT_MIN_SECONDS: "300"
+      SIMULATION_PROCUREMENT_MAX_SECONDS: "900"
+      SIMULATION_MAX_PENDING_ORDERS: "8"
+    volumes:
+      - ./src:/opt/airflow/src:ro
+    depends_on:
+      wwi-sqlserver:
+        condition: service_healthy
+      warehouse-db:
+        condition: service_healthy
+    restart: unless-stopped
+  warehouse-db:
+    image: postgres:${POSTGRES_VERSION:-17.11}-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DWH_DB}
+      POSTGRES_USER: ${DWH_USER}
+      POSTGRES_PASSWORD: ${DWH_PASSWORD}
+    ports:
+      - "127.0.0.1:${DWH_HOST_PORT:-15434}:5432"
+    volumes:
+      - warehouse_data:/var/lib/postgresql/data
+      - ./warehouse/init:/docker-entrypoint-initdb.d:ro
+      - ./sql/warehouse:/opt/project/sql/warehouse:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  airflow-db:
+    image: postgres:${POSTGRES_VERSION:-17.11}-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${AIRFLOW_DB_NAME}
+      POSTGRES_USER: ${AIRFLOW_DB_USER}
+      POSTGRES_PASSWORD: ${AIRFLOW_DB_PASSWORD}
+    volumes:
+      - airflow_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  dbt-runtime-init:
+    image: supply-chain-control-tower-airflow:${AIRFLOW_VERSION:-3.3.1}
+    user: "0:0"
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        set -euo pipefail
+        mkdir -p /opt/airflow/dbt-runtime/logs /opt/airflow/dbt-runtime/target
+        chown -R 50000:0 /opt/airflow/dbt-runtime
+    volumes:
+      - dbt_runtime:/opt/airflow/dbt-runtime
+    restart: "no"
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        set -euo pipefail
+        airflow db migrate
+        airflow version
+    restart: "no"
+
+  airflow-api-server:
+    <<: *airflow-common
+    command: api-server
+    ports:
+      - "127.0.0.1:${AIRFLOW_API_PORT:-28080}:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/monitor/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-db:
+        condition: service_healthy
+      warehouse-db:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    healthcheck:
+      test: ["CMD-SHELL", "airflow jobs check --job-type SchedulerJob --hostname \"$${HOSTNAME}\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-db:
+        condition: service_healthy
+      warehouse-db:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+      airflow-api-server:
+        condition: service_healthy
+    restart: unless-stopped
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    healthcheck:
+      test: ["CMD-SHELL", "airflow jobs check --job-type DagProcessorJob --hostname \"$${HOSTNAME}\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      airflow-db:
+        condition: service_healthy
+      warehouse-db:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  realtime-consumer:
+    image: supply-chain-control-tower-airflow:${AIRFLOW_VERSION:-3.3.1}
+    entrypoint: /bin/bash
+    command: ["-c", "python /opt/airflow/src/realtime/consumer.py"]
+    environment:
+      PYTHONPATH: /opt/airflow/src
+      DWH_HOST: warehouse-db
+      DWH_PORT: "5432"
+      DWH_DB: ${DWH_DB}
+      DWH_USER: ${DWH_USER}
+      DWH_PASSWORD: ${DWH_PASSWORD}
+      WWI_HOST: wwi-sqlserver
+      WWI_PORT: "1433"
+      WWI_DATABASE: ${WWI_DATABASE}
+      WWI_EVENT_USER: ${WWI_EVENT_USER}
+      WWI_EVENT_PASSWORD: ${WWI_EVENT_PASSWORD}
+      REALTIME_WAIT_TIMEOUT_MS: "30000"
+      REALTIME_EVENT_MAX_ATTEMPTS: "3"
+    volumes:
+      - ./src:/opt/airflow/src:ro
+    depends_on:
+      warehouse-db:
+        condition: service_healthy
+      wwi-sqlserver:
+        condition: service_healthy
+    restart: unless-stopped
+  realtime-api:
+    image: supply-chain-control-tower-airflow:${AIRFLOW_VERSION:-3.3.1}
+    entrypoint: /bin/bash
+    command: ["-c", "uvicorn realtime.api:app --host 0.0.0.0 --port 8000"]
+    environment:
+      PYTHONPATH: /opt/airflow/src
+      DWH_HOST: warehouse-db
+      DWH_PORT: "5432"
+      DWH_DB: ${DWH_DB}
+      DWH_USER: ${DWH_USER}
+      DWH_PASSWORD: ${DWH_PASSWORD}
+      WWI_HOST: wwi-sqlserver
+      WWI_PORT: "1433"
+      WWI_DATABASE: ${WWI_DATABASE}
+      WWI_EVENT_USER: ${WWI_EVENT_USER}
+      WWI_EVENT_PASSWORD: ${WWI_EVENT_PASSWORD}
+      REALTIME_SSE_KEEPALIVE_SECONDS: "15"
+    ports:
+      - "127.0.0.1:${REALTIME_API_PORT:-28100}:8000"
+    volumes:
+      - ./src:/opt/airflow/src:ro
+    depends_on:
+      warehouse-db:
+        condition: service_healthy
+      wwi-sqlserver:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  dbt_runtime:
+  wwi_sqlserver_data:
+  warehouse_data:
+  airflow_db_data:
+  airflow_logs:
+
+
+
+
+
+
+
+
+
+
+
+

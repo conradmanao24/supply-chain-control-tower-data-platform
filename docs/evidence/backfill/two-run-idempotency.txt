@@ -1,0 +1,8 @@
+﻿=== TWO-RUN IDEMPOTENCY ===
+supply_chain_backfill  phase9_backfill_run2_20260917  success  2026-09-17T13:27:58.687949+00:00                  2026-09-17T13:27:59.046081+00:00  2026-09-17T13:28:32.243464+00:00
+supply_chain_backfill  phase9_backfill_run1_20260917  success  2026-09-17T13:26:35.317883+00:00                  2026-09-17T13:26:36.157554+00:00  2026-09-17T13:27:18.811858+00:00
+phase9_backfill_run1_20260917|success|2026-09-16 00:00:00+00|2026-09-16 00:00:00+00|89bb66ff843c343cb6c5781cd26c9e01
+phase9_backfill_run2_20260917|success|2026-09-16 00:00:00+00|2026-09-16 00:00:00+00|89bb66ff843c343cb6c5781cd26c9e01
+verification_equal|true
+watermark|2026-09-16 00:00:00+00
+guard|FREE

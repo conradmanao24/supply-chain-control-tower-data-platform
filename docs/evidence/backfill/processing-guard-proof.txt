@@ -1,0 +1,4 @@
+﻿INCREMENTAL_BLOCKED_BY_BACKFILL PASS: processing guard owned by backfill:phase9_guard_backfill_proof
+BACKFILL_BLOCKED_BY_INCREMENTAL PASS: processing guard already owned by incremental:phase9_guard_incremental_proof
+FRONTIER_REJECTION PASS: backfill end exceeds safe source frontier: 2026-09-17 00:00:00+00:00 > 2026-09-16 00:00:00+00:00
+PROOF_ROWS {'incremental_conflict_history': 0, 'backfill_conflict_history': 0, 'frontier_rejection_history': 0, 'guard_free': 1}

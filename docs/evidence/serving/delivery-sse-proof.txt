@@ -1,0 +1,10 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: 22222222-2222-2222-2222-222222222222
+event: update
+data: {"event_id":"22222222-2222-2222-2222-222222222222","event_type":"delivery.changed","entity_type":"invoice","operation":"UPDATE","processing_result":"phase11_delivery_sse_proof"}
+
+event: alert
+data: {"event_kind":"alert","alert_id":0,"rule_id":"delivery.overdue","domain":"delivery","entity_type":"invoice","entity_id":"phase11-proof","severity":"warning","status":"open"}
+

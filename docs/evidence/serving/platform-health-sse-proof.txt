@@ -1,0 +1,7 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: 66666666-6666-6666-6666-666666666666
+event: update
+data: {"event_id" : "66666666-6666-6666-6666-666666666666", "event_type" : "platform.health.proof", "entity_type" : "platform", "operation" : "CHECK", "processing_result" : "phase11_platform_health_sse_proof"}
+

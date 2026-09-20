@@ -1,0 +1,31 @@
+﻿event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 1, "rule_id" : "inventory.reorder", "entity_type" : "stock_item", "entity_id" : "203", "severity" : "warning", "status" : "open", "opened_at" : "2026-09-17T11:43:55.406622+00:00", "last_observed_at" : "2026-09-17T12:17:36.462484+00:00", "resolved_at" : null}
+
+id: adea87b4-f717-4f36-8e65-335948ce68f1
+event: update
+data: {"event_id" : "adea87b4-f717-4f36-8e65-335948ce68f1", "schema_version" : 1, "event_type" : "inventory.changed", "entity_type" : "stock_item", "operation" : "UPDATE", "processing_result" : "processed", "occurred_at_utc" : "2026-09-17T12:17:36.447145+00:00", "processed_at" : "2026-09-17T12:17:36.462484+00:00"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 2, "rule_id" : "fulfillment.overdue", "entity_type" : "order", "entity_id" : "323483", "severity" : "warning", "status" : "open", "opened_at" : "2026-09-17T11:43:55.421861+00:00", "last_observed_at" : "2026-09-17T12:17:36.483429+00:00", "resolved_at" : null}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 3, "rule_id" : "fulfillment.backorder", "entity_type" : "order", "entity_id" : "323483", "severity" : "warning", "status" : "open", "opened_at" : "2026-09-17T11:43:55.421861+00:00", "last_observed_at" : "2026-09-17T12:17:36.483429+00:00", "resolved_at" : null}
+
+id: 6328f222-871c-4303-8a2e-66dd45eccd88
+event: update
+data: {"event_id" : "6328f222-871c-4303-8a2e-66dd45eccd88", "schema_version" : 1, "event_type" : "order.changed", "entity_type" : "order", "operation" : "UPDATE", "processing_result" : "processed", "occurred_at_utc" : "2026-09-17T12:17:36.455333+00:00", "processed_at" : "2026-09-17T12:17:36.483429+00:00"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 4, "rule_id" : "delivery.overdue", "entity_type" : "invoice", "entity_id" : "308002", "severity" : "warning", "status" : "open", "opened_at" : "2026-09-17T11:44:01.4685+00:00", "last_observed_at" : "2026-09-17T12:17:36.510428+00:00", "resolved_at" : null}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 5, "rule_id" : "delivery.receiver_not_present", "entity_type" : "invoice", "entity_id" : "308002", "severity" : "warning", "status" : "open", "opened_at" : "2026-09-17T11:44:01.4685+00:00", "last_observed_at" : "2026-09-17T12:17:36.510428+00:00", "resolved_at" : null}
+
+id: 6b2318cd-f048-448d-a005-e538c92b47cf
+event: update
+data: {"event_id" : "6b2318cd-f048-448d-a005-e538c92b47cf", "schema_version" : 1, "event_type" : "delivery.changed", "entity_type" : "invoice", "operation" : "UPDATE", "processing_result" : "processed", "occurred_at_utc" : "2026-09-17T12:17:36.463497+00:00", "processed_at" : "2026-09-17T12:17:36.510428+00:00"}
+
+

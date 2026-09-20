@@ -1,0 +1,20 @@
+reliability/recovery analytical rerun correctness proof
+UTC date: 2026-09-17
+
+Pipeline state before manual rerun:
+last_successful_cutoff = 2026-09-16 00:00:00+00
+
+Triggered Airflow run:
+phase8_rerun_correctness_20260917
+
+Airflow final state:
+success
+run_after: 2026-09-17T12:41:37.903559+00:00
+start_date: 2026-09-17T12:41:38.898422+00:00
+end_date: 2026-09-17T12:41:44.455680+00:00
+
+Pipeline state after rerun:
+last_successful_cutoff = 2026-09-16 00:00:00+00
+
+Result: PASS
+With the source frontier not ahead of the committed watermark, the rerun completed successfully as a no-op and did not advance or corrupt durable pipeline state.

@@ -1,0 +1,11 @@
+﻿supply_chain_incremental_pipeline  phase9_incremental_regression_20260917     success  2026-09-17T13:34:50.321078+00:00                             2026-09-17T13:34:50.635569+00:00  2026-09-17T13:34:57.080167+00:00
+dag_id                            | logical_date | task_id               | state   | start_date                       | end_date                        
+==================================+==============+=======================+=========+==================================+=================================
+supply_chain_incremental_pipeline |              | prepare_run           | success | 2026-09-17T13:34:50.869664+00:00 | 2026-09-17T13:34:51.155923+00:00
+supply_chain_incremental_pipeline |              | incremental_staging   | success | 2026-09-17T13:34:51.912803+00:00 | 2026-09-17T13:34:52.080514+00:00
+supply_chain_incremental_pipeline |              | dbt_core_refresh      | success | 2026-09-17T13:34:53.006610+00:00 | 2026-09-17T13:34:53.499130+00:00
+supply_chain_incremental_pipeline |              | incremental_telemetry | success | 2026-09-17T13:34:51.948841+00:00 | 2026-09-17T13:34:52.303886+00:00
+supply_chain_incremental_pipeline |              | verify_core           | success | 2026-09-17T13:34:54.071164+00:00 | 2026-09-17T13:34:54.989660+00:00
+supply_chain_incremental_pipeline |              | mark_failed           | skipped | 2026-09-17T13:34:56.010246+00:00 | 2026-09-17T13:34:56.010246+00:00
+supply_chain_incremental_pipeline |              | commit_success        | success | 2026-09-17T13:34:56.188537+00:00 | 2026-09-17T13:34:56.517563+00:00
+                                                                                                                                                        

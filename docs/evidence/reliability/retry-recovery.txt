@@ -1,0 +1,23 @@
+reliability/recovery retry / dead-letter / controlled-recovery proof
+UTC date: 2026-09-17
+
+Controlled failure:
+- REVOKE EXECUTE on ControlTower.GetInventoryCurrentState from sct_event_consumer
+- publish inventory.changed for stock_item 203
+- event_id: 307F0634-0E5A-4D27-A024-95EB1A25C3F3
+
+Consumer output:
+EVENT_RETRY id=307F0634-0E5A-4D27-A024-95EB1A25C3F3 type=inventory.changed attempt=1 error=OperationalError: EXECUTE permission denied on GetInventoryCurrentState
+EVENT_RETRY id=307F0634-0E5A-4D27-A024-95EB1A25C3F3 type=inventory.changed attempt=2 error=OperationalError: EXECUTE permission denied on GetInventoryCurrentState
+DEAD_LETTERED type=//SupplyChainControlTower/Event error=OperationalError: EXECUTE permission denied on GetInventoryCurrentState
+
+Controlled recovery:
+- GRANT EXECUTE restored to sct_event_consumer
+- unreplayed dead-letter selected: DeadLetterID=4
+- ControlTower.ReplayDeadLetter executed
+
+Recovery output:
+EVENT_PROCESSED id=307F0634-0E5A-4D27-A024-95EB1A25C3F3 type=inventory.changed result=processed attempt=1
+
+Result: PASS
+The original message was retained after all configured attempts failed and was successfully processed after the cause was corrected and the preserved message was replayed.

@@ -1,0 +1,5 @@
+﻿DeadLetterID IsReplayed FailedAtUtc ReplayedAtUtc ErrorMessage
+------------ ---------- ----------- ------------- ------------
+2 1 2026-09-17 11:44:01.4561081 2026-09-17 11:45:19.0138795 (229, b"The EXECUTE permission was denied on the object 'CancelDeadline', database 'WideWorldImporters', schema 'ControlTower'.DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+3 1 2026-09-17 11:44:07.5150938 2026-09-17 11:45:19.0179522 (229, b"The EXECUTE permission was denied on the object 'CancelDeadline', database 'WideWorldImporters', schema 'ControlTower'.DB-Lib error message 20018, severity 14:\nGeneral SQL Server error: Check messages from the SQL Server\n")
+

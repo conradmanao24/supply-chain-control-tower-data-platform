@@ -1,0 +1,40 @@
+﻿Changed database context to 'WideWorldImporters'.
+Warning: Null value is eliminated by an aggregate or other SET operation.
+Warning: Null value is eliminated by an aggregate or other SET operation.
+Warning: Null value is eliminated by an aggregate or other SET operation.
+Warning: Null value is eliminated by an aggregate or other SET operation.
+Warning: Null value is eliminated by an aggregate or other SET operation.
+schema_name,table_name,column_name,data_type,min_value,max_value
+-----------,----------,-----------,---------,---------,---------
+Application,SystemParameters,LastEditedWhen,datetime2,2013-01-01T00:00:00,2013-01-01T00:00:00
+Purchasing,PurchaseOrderLines,LastEditedWhen,datetime2,2013-01-02T07:00:00,2016-06-07T13:00:00
+Purchasing,PurchaseOrderLines,LastReceiptDate,date,2013-01-02,2016-06-07
+Purchasing,PurchaseOrders,ExpectedDeliveryDate,date,2013-01-15,2016-06-27
+Purchasing,PurchaseOrders,LastEditedWhen,datetime2,2013-01-02T07:00:00,2016-06-07T13:00:00
+Purchasing,PurchaseOrders,OrderDate,date,2013-01-01,2016-06-07
+Purchasing,SupplierTransactions,FinalizationDate,date,2013-01-07,2016-06-06
+Purchasing,SupplierTransactions,LastEditedWhen,datetime2,2013-01-07T09:00:00,2016-06-07T07:00:00
+Purchasing,SupplierTransactions,TransactionDate,date,2013-01-02,2016-06-07
+Sales,Customers,AccountOpenedDate,date,2013-01-01,2016-06-06
+Sales,CustomerTransactions,FinalizationDate,date,2013-01-02,2016-06-07
+Sales,CustomerTransactions,LastEditedWhen,datetime2,2013-01-02T11:30:00,2016-06-07T12:00:00
+Sales,CustomerTransactions,TransactionDate,date,2013-01-01,2016-06-07
+Sales,InvoiceLines,LastEditedWhen,datetime2,2013-01-01T12:00:00,2016-06-07T12:00:00
+Sales,Invoices,ConfirmedDeliveryTime,datetime2,2013-01-02T07:05:00,2016-06-07T13:35:00
+Sales,Invoices,InvoiceDate,date,2013-01-01,2016-06-07
+Sales,Invoices,LastEditedWhen,datetime2,2013-01-02T07:00:00,2016-06-07T12:00:00
+Sales,OrderLines,LastEditedWhen,datetime2,2013-01-01T11:00:00,2016-06-07T12:00:00
+Sales,OrderLines,PickingCompletedWhen,datetime2,2013-01-01T11:00:00,2016-06-07T11:00:00
+Sales,Orders,ExpectedDeliveryDate,date,2013-01-02,2016-06-08
+Sales,Orders,LastEditedWhen,datetime2,2013-01-01T11:00:00,2016-06-07T12:00:00
+Sales,Orders,OrderDate,date,2013-01-01,2016-06-07
+Sales,Orders,PickingCompletedWhen,datetime2,2013-01-01T11:00:00,2016-06-07T12:00:00
+Sales,SpecialDeals,EndDate,date,2016-03-31,2016-06-30
+Sales,SpecialDeals,LastEditedWhen,datetime2,2015-12-31T16:00:00,2015-12-31T16:00:00
+Sales,SpecialDeals,StartDate,date,2016-01-01,2016-04-01
+Warehouse,ColdRoomTemperatures,RecordedWhen,datetime2,2016-06-07T23:59:06,2016-06-07T23:59:06
+Warehouse,StockItemHoldings,LastEditedWhen,datetime2,2016-06-07T07:00:00,2016-06-07T12:00:00
+Warehouse,StockItemStockGroups,LastEditedWhen,datetime2,2013-01-01T00:00:00,2016-01-05T00:00:00
+Warehouse,StockItemTransactions,LastEditedWhen,datetime2,2013-01-01T12:00:00,2016-06-07T12:00:00
+Warehouse,StockItemTransactions,TransactionOccurredWhen,datetime2,2013-01-01T12:00:00,2016-06-07T12:00:00
+Warehouse,VehicleTemperatures,RecordedWhen,datetime2,2016-01-01T07:00:00,2016-06-07T15:58:02

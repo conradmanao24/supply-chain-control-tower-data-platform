@@ -1,0 +1,13 @@
+supply_chain_control_tower:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('DWH_HOST') }}"
+      port: "{{ env_var('DWH_PORT') | int }}"
+      user: "{{ env_var('DWH_USER') }}"
+      password: "{{ env_var('DWH_PASSWORD') }}"
+      dbname: "{{ env_var('DWH_DB') }}"
+      schema: analytics
+      threads: 4
+      connect_timeout: 10

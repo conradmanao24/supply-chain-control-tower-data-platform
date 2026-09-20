@@ -1,0 +1,16 @@
+name: supply_chain_control_tower
+version: '1.0.0'
+config-version: 2
+profile: supply_chain_control_tower
+model-paths: ['models']
+test-paths: ['tests']
+seed-paths: ['seeds']
+macro-paths: ['macros']
+clean-targets: ['target', 'dbt_packages']
+
+models:
+  supply_chain_control_tower:
+    +materialized: view
+    core:
+      +schema: core
+      +materialized: table

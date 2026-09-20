@@ -1,0 +1,9 @@
+OPEN platform.pipeline_failed: {"result":"opened","rule_id":"platform.pipeline_failed","entity_id":"phase7-pipeline-proof"}
+CLEAR platform.pipeline_failed: {"result":"resolved","rule_id":"platform.pipeline_failed","entity_id":"phase7-pipeline-proof"}
+OPEN platform.reconciliation_mismatch: {"result":"opened","rule_id":"platform.reconciliation_mismatch","entity_id":"phase7-recon-proof"}
+CLEAR platform.reconciliation_mismatch: {"result":"resolved","rule_id":"platform.reconciliation_mismatch","entity_id":"phase7-recon-proof"}
+OPEN platform.data_quality_failed: {"result":"opened","rule_id":"platform.data_quality_failed","entity_id":"phase7-dq-proof"}
+ACK alert_id=14: {"alert_id":14,"rule_id":"platform.data_quality_failed","entity_type":"platform","entity_id":"phase7-dq-proof","severity":"critical","status":"acknowledged","opened_at":"2026-09-17T11:47:28.891659+00:00","acknowledged_at":"2026-09-17T11:47:28.966339+00:00","acknowledged_by":"phase7-proof","resolved_at":null,"resolution_reason":null}
+RESOLVE alert_id=14: {"alert_id":14,"rule_id":"platform.data_quality_failed","entity_type":"platform","entity_id":"phase7-dq-proof","severity":"critical","status":"resolved","opened_at":"2026-09-17T11:47:28.891659+00:00","acknowledged_at":"2026-09-17T11:47:28.966339+00:00","acknowledged_by":"phase7-proof","resolved_at":"2026-09-17T11:47:29.002730+00:00","resolved_by":"phase7-proof","resolution_reason":"controlled alert/exception lifecycle proof"}
+HISTORY: [{"history_id":12,"action":"opened","actor":"engine","occurred_at":"2026-09-17T11:47:28.891659+00:00","details":{"observed":{"test":"dbt","failed":1},"threshold":{},"source_event_id":null}},{"history_id":13,"action":"acknowledged","actor":"phase7-proof","occurred_at":"2026-09-17T11:47:28.966339+00:00","details":{}},{"history_id":14,"action":"resolved","actor":"phase7-proof","occurred_at":"2026-09-17T11:47:29.002730+00:00","details":{"reason":"controlled alert/exception lifecycle proof"}}]
+

@@ -1,0 +1,7 @@
+﻿Changed database context to 'WideWorldImporters'.
+schema_name,table_count
+-----------,-----------
+Application,15
+Purchasing,7
+Sales,12
+Warehouse,14

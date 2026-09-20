@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --accent: #ff4c4b;
+  --accent-soft: #ffd2d2;
+  --accent-pale: #ffe2e2;
+  --surface: #ffffff;
+  --surface-subtle: #f7f7f8;
+  --surface-muted: #f5f6f8;
+  --border: #d9d9d9;
+  --text-primary: #2d2e33;
+  --text-muted: #969699;
+  --sidebar-dark: #2d2e33;
+  --sidebar-dark-2: #24252a;
+  --success: #22a06b;
+  --warning: #d89310;
+  --critical: #d73a49;
+
+  /* Fluid foundation: keeps the UI visually comparable on 1080p and 2K/large viewports. */
+  --radius-card: clamp(12px, 0.68vw, 16px);
+  --radius-control: clamp(8px, 0.46vw, 11px);
+  --page-gap: clamp(16px, 0.95vw, 22px);
+  --compact-gap: clamp(10px, 0.62vw, 14px);
+  --page-pad-x: clamp(20px, 1.35vw, 32px);
+  --page-pad-y: clamp(18px, 1.05vw, 26px);
+  --sidebar-width: clamp(248px, 13vw, 320px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  font-size: clamp(16px, 0.84vw, 20px);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--surface-subtle);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}

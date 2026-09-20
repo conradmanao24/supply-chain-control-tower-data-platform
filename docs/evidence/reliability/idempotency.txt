@@ -1,0 +1,23 @@
+reliability/recovery duplicate-delivery / idempotency proof
+UTC date: 2026-09-17
+
+Event under test:
+307F0634-0E5A-4D27-A024-95EB1A25C3F3
+
+Before duplicate delivery:
+realtime.event_log rows for event_id = 1
+alert.alerts rows with source_event_id = 1
+alert.alert_history rows for those alerts = 1
+
+The exact preserved broker message body was sent again with the same event_id.
+
+Consumer output:
+EVENT_PROCESSED id=307F0634-0E5A-4D27-A024-95EB1A25C3F3 type=inventory.changed result=duplicate attempt=1
+
+After duplicate delivery:
+realtime.event_log rows for event_id = 1
+alert.alerts rows with source_event_id = 1
+alert.alert_history rows for those alerts = 1
+
+Result: PASS
+Duplicate redelivery did not duplicate the event log, alert row, or alert history side effects.

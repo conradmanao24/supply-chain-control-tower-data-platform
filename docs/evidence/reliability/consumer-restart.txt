@@ -1,0 +1,27 @@
+reliability/recovery queue / consumer restart proof
+UTC date: 2026-09-17
+
+Consumer was intentionally stopped before publication.
+
+Published event:
+- event_type: inventory.changed
+- source_table: Phase8.RestartProof
+- entity_id: 204
+- event_id: 113A78C1-FB43-471E-8B75-89833C609186
+
+While consumer was stopped:
+EventConsumerQueue rows = 2
+  1 x //SupplyChainControlTower/Event
+  1 x http://schemas.microsoft.com/SQL/ServiceBroker/EndDialog
+
+Consumer was started again.
+
+Consumer output:
+EVENT_PROCESSED id=113A78C1-FB43-471E-8B75-89833C609186 type=inventory.changed result=processed attempt=1
+
+After restart:
+EventConsumerQueue rows = 0
+realtime.event_log processing_result = processed
+
+Result: PASS
+The event persisted while the consumer was offline and was processed automatically after restart; no source polling or manual event regeneration was required.

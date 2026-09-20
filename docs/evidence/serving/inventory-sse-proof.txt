@@ -1,0 +1,10 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: 33333333-3333-3333-3333-333333333333
+event: update
+data: {"event_id" : "33333333-3333-3333-3333-333333333333", "event_type" : "inventory.changed", "entity_type" : "stock_item", "operation" : "UPDATE", "processing_result" : "phase11_inventory_sse_proof"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 0, "rule_id" : "inventory.reorder", "domain" : "inventory", "entity_type" : "stock_item", "entity_id" : "phase11-proof", "severity" : "warning", "status" : "open"}
+

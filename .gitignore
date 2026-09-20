@@ -1,0 +1,65 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Runtime data / database assets
+data/*
+!data/README.md
+*.bak
+*.bacpac
+*.mdf
+*.ldf
+*.trn
+backups/
+
+# Logs / generated artifacts
+*.pid
+logs/
+*.log
+tmp/
+temp/
+artifacts/
+
+# Airflow generated runtime content
+airflow/logs/
+airflow/airflow.db
+airflow/airflow.cfg
+
+# dbt generated content
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+.dbt/
+
+# Local Docker overrides
+docker-compose.override.yml
+compose.override.yml
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test / tooling caches
+.tox/
+.nox/
+.cache/

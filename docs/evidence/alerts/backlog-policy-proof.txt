@@ -1,0 +1,21 @@
+﻿         activated_at          |   backlog_policy   |                                                notes                                                
+-------------------------------+--------------------+-----------------------------------------------------------------------------------------------------
+ 2026-09-17 11:35:59.143589+00 | event_touched_only | No historical full sweep at go-live; only entities touched by post-activation events are evaluated.
+(1 row)
+
+ historical_unpicked_overdue_rows 
+----------------------------------
+                            15472
+(1 row)
+
+ alerts_opened_at_or_before_activation 
+---------------------------------------
+                                     0
+(1 row)
+
+     first_alert_opened_at     | total_alert_rows 
+-------------------------------+------------------
+ 2026-09-17 11:43:55.406622+00 |                8
+(1 row)
+
+

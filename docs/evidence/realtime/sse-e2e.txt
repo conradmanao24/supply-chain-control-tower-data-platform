@@ -1,0 +1,7 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: a5eb2dee-43f4-4cf9-8673-3aea0d94f9c8
+event: update
+data: {"event_id" : "a5eb2dee-43f4-4cf9-8673-3aea0d94f9c8", "schema_version" : 1, "event_type" : "order.changed", "entity_type" : "order", "operation" : "UPDATE", "processing_result" : "processed", "occurred_at_utc" : "2026-09-17T11:20:48.259476+00:00", "processed_at" : "2026-09-17T11:20:48.271236+00:00"}
+

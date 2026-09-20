@@ -1,0 +1,23 @@
+﻿=== RUN 1 TASK STATES ===
+dag_id                | logical_date | task_id            | state   | start_date                       | end_date                        
+======================+==============+====================+=========+==================================+=================================
+supply_chain_backfill |              | prepare_backfill   | success | 2026-09-17T13:26:36.421091+00:00 | 2026-09-17T13:26:36.779763+00:00
+supply_chain_backfill |              | backfill_telemetry | success | 2026-09-17T13:26:37.624643+00:00 | 2026-09-17T13:26:43.476890+00:00
+supply_chain_backfill |              | backfill_staging   | success | 2026-09-17T13:26:37.627634+00:00 | 2026-09-17T13:26:55.531318+00:00
+supply_chain_backfill |              | dbt_core_refresh   | success | 2026-09-17T13:26:56.127191+00:00 | 2026-09-17T13:27:08.878068+00:00
+supply_chain_backfill |              | complete_backfill  | success | 2026-09-17T13:27:16.259164+00:00 | 2026-09-17T13:27:16.677710+00:00
+supply_chain_backfill |              | verify_backfill    | success | 2026-09-17T13:27:10.088742+00:00 | 2026-09-17T13:27:14.822463+00:00
+supply_chain_backfill |              | mark_failed        | skipped | 2026-09-17T13:27:17.748820+00:00 | 2026-09-17T13:27:17.748820+00:00
+                                                                                                                                         
+
+=== RUN 2 TASK STATES ===
+dag_id                | logical_date | task_id            | state   | start_date                       | end_date                        
+======================+==============+====================+=========+==================================+=================================
+supply_chain_backfill |              | dbt_core_refresh   | success | 2026-09-17T13:28:13.232453+00:00 | 2026-09-17T13:28:23.818487+00:00
+supply_chain_backfill |              | verify_backfill    | success | 2026-09-17T13:28:24.761940+00:00 | 2026-09-17T13:28:29.106506+00:00
+supply_chain_backfill |              | complete_backfill  | success | 2026-09-17T13:28:30.306578+00:00 | 2026-09-17T13:28:30.539171+00:00
+supply_chain_backfill |              | mark_failed        | skipped | 2026-09-17T13:28:31.186463+00:00 | 2026-09-17T13:28:31.186463+00:00
+supply_chain_backfill |              | prepare_backfill   | success | 2026-09-17T13:27:59.312462+00:00 | 2026-09-17T13:27:59.639508+00:00
+supply_chain_backfill |              | backfill_telemetry | success | 2026-09-17T13:28:00.338622+00:00 | 2026-09-17T13:28:02.183115+00:00
+supply_chain_backfill |              | backfill_staging   | success | 2026-09-17T13:28:00.329711+00:00 | 2026-09-17T13:28:12.752682+00:00
+                                                                                                                                         

@@ -1,0 +1,49 @@
+=== BACKFILL FINAL AUDIT ===
+
+BASELINE
+watermark|2026-09-16 00:00:00+00
+guard|FREE|
+alerts|0
+order_lines|1009327
+sales_lines|993477
+inventory_movements|1028716
+purchase_lines|35089
+delivery_events|616062
+customer_tx|443041
+supplier_tx|9812
+coldroom_5m|4519296
+vehicle_5m|844776
+
+BACKFILL RUN HISTORY
+phase9_backfill_run1_20260917|2026-08-01 00:00:00+00|2026-08-02 00:00:00+00|success|2026-09-16 00:00:00+00|2026-09-16 00:00:00+00|89bb66ff843c343cb6c5781cd26c9e01
+phase9_backfill_run2_20260917|2026-08-01 00:00:00+00|2026-08-02 00:00:00+00|success|2026-09-16 00:00:00+00|2026-09-16 00:00:00+00|89bb66ff843c343cb6c5781cd26c9e01
+
+CURRENT WAREHOUSE STATE
+watermark|2026-09-16 00:00:00+00
+frontier|2026-09-16 00:00:00+00
+guard|FREE|
+active_alerts|0
+duplicate_active_alerts|0
+order_lines|1009327
+sales_lines|993477
+inventory_movements|1028716
+purchase_lines|35089
+delivery_events|616062
+customer_tx|443041
+supplier_tx|9812
+coldroom_5m|4519296
+vehicle_5m|844776
+events_during_backfill|0
+
+BROKER
+0 0 0 0 0
+
+RUNTIME
+NAME                                                 IMAGE                                        COMMAND                  SERVICE                 CREATED          STATUS                       PORTS
+supply-chain-control-tower-airflow-api-server-1      supply-chain-control-tower-airflow:3.3.1     "/usr/bin/dumb-init ΓÇª"   airflow-api-server      20 hours ago     Up 4 hours (healthy)         127.0.0.1:28080->8080/tcp
+supply-chain-control-tower-airflow-dag-processor-1   supply-chain-control-tower-airflow:3.3.1     "/usr/bin/dumb-init ΓÇª"   airflow-dag-processor   20 hours ago     Up 11 minutes (healthy)      8080/tcp
+supply-chain-control-tower-airflow-scheduler-1       supply-chain-control-tower-airflow:3.3.1     "/usr/bin/dumb-init ΓÇª"   airflow-scheduler       20 hours ago     Up 4 hours (healthy)         8080/tcp
+supply-chain-control-tower-realtime-api-1            supply-chain-control-tower-airflow:3.3.1     "/bin/bash -c 'uvicoΓÇª"   realtime-api            3 hours ago      Up About an hour (healthy)   127.0.0.1:18000->8000/tcp
+supply-chain-control-tower-realtime-consumer-1       supply-chain-control-tower-airflow:3.3.1     "/bin/bash -c 'pythoΓÇª"   realtime-consumer       48 minutes ago   Up 48 minutes                8080/tcp
+supply-chain-control-tower-warehouse-db-1            postgres:17.11-bookworm                      "docker-entrypoint.sΓÇª"   warehouse-db            22 hours ago     Up 4 hours (healthy)         127.0.0.1:15434->5432/tcp
+supply-chain-control-tower-wwi-sqlserver-1           mcr.microsoft.com/mssql/server:2022-latest   "/opt/mssql/bin/launΓÇª"   wwi-sqlserver           20 hours ago     Up 4 hours (healthy)         127.0.0.1:14333->1433/tcp

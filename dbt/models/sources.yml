@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    tables:
+      - name: order_line
+      - name: sale_line
+      - name: inventory_movement
+      - name: purchase_line
+      - name: financial_transaction
+      - name: order_state
+      - name: invoice_delivery
+      - name: purchase_order_state
+      - name: customer_current
+      - name: customer_history
+      - name: supplier_current
+      - name: supplier_history
+      - name: product_current
+      - name: product_history
+      - name: product_stock_group
+      - name: stock_holding_current
+      - name: employee_current
+      - name: employee_history
+      - name: geography_current
+      - name: delivery_method_current
+      - name: transaction_type_current
+      - name: payment_method_current
+      - name: package_type_current
+      - name: stock_group_current
+      - name: coldroom_5m
+      - name: vehicle_5m

@@ -1,0 +1,21 @@
+﻿Changed database context to 'WideWorldImporters'.
+object_name,min_date,max_date,rows_in_window
+-----------,--------,--------,--------------
+Purchasing.PurchaseOrders,2016-06-01,2016-06-07,12
+Purchasing.SupplierTransactions,2016-06-01,2016-06-07,14
+Sales.CustomerTransactions,2016-06-01,2016-06-07,530
+Sales.Invoices,2016-06-01,2016-06-07,386
+Sales.Orders,2016-06-01,2016-06-07,400
+Warehouse.StockItemTransactions,2016-06-01,2016-06-07,1297
+Warehouse.VehicleTemperatures,2016-06-01,2016-06-07,2998
+OrderDate,orders
+---------,------
+2016-06-01,64
+2016-06-02,50
+2016-06-03,41
+2016-06-04,52
+2016-06-06,82
+2016-06-07,111
+temporal_current_tables,temporal_history_tables,leftover_dataload_triggers,disabled_foreign_keys,untrusted_foreign_keys
+-----------------------,-----------------------,--------------------------,---------------------,----------------------
+0,0,16,0,0

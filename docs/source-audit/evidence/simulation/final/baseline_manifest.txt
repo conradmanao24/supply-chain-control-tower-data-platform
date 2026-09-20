@@ -1,0 +1,10 @@
+﻿baseline_version=phase0-full-2026-09-15
+source_database=WideWorldImporters
+source_range=2013-01-01..2026-09-15
+raw_rows=93334276
+file=data/baselines/full-master/wwi-full-master-2026-09-15.bak
+size_bytes=1662111744
+size_gib=1.548
+sha256=1F779A53D9AE1E5B90F2C62BA74D3E48E5FED0F75096E5EC798A09ABF04DEE30
+restore_verifyonly=PASS
+source_checkdb_physical_only=PASS

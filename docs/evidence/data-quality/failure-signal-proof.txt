@@ -1,0 +1,10 @@
+﻿QUALITY_CHECK FAIL category=reconciliation name=controlled_reconciliation_mismatch source=100 target=99
+QUALITY_RUN_FINAL status=FAIL run=723bc9af-93a9-41f1-942c-8b0d1924e633 passed=0 failed=1 warnings=0
+FAIL_RUN_RESULT False
+ACTIVE_AFTER_FAILURE [(57, 'platform.data_quality_failed', 'open'), (58, 'platform.reconciliation_mismatch', 'open')]
+QUALITY_CHECK PASS category=reconciliation name=controlled_reconciliation_recovered source=100 target=100
+QUALITY_RUN_FINAL status=PASS run=8c320710-a3a3-441f-9985-1eb8b0ce3255 passed=1 failed=0 warnings=0
+RECOVERY_RUN_RESULT True
+ACTIVE_AFTER_RECOVERY []
+RESOLVED_ALERTS [('platform.data_quality_failed', 'resolved', 'platform_recovered'), ('platform.reconciliation_mismatch', 'resolved', 'platform_recovered')]
+CLEANUP PASS

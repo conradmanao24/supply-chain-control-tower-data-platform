@@ -1,0 +1,61 @@
+=== DATA QUALITY/RECONCILIATION FINAL AUDIT ===
+
+   section   |           airflow_run_id            | mode | status | passed_checks | failed_checks | warning_checks 
+-------------+-------------------------------------+------+--------+---------------+---------------+----------------
+ QUALITY_RUN | phase10_full_airflow_proof_20260917 | full | pass   |            57 |             0 |              0
+(1 row)
+
+    category     | status | count 
+-----------------+--------+-------
+ freshness       | pass   |     7
+ reconciliation  | pass   |    20
+ referential     | pass   |     1
+ semantic        | pass   |     3
+ source_behavior | pass   |     1
+ structural      | pass   |     1
+ volume          | pass   |    24
+(7 rows)
+
+                      check_name                      | status | source_value | target_value 
+------------------------------------------------------+--------+--------------+--------------
+ dbt_structural_integrity                             | pass   | 116          | 116
+ known_source_behavior_delivery_attempt_status_absent | pass   | 30733        | 30733
+ telemetry_max_temperature_coldroom                   | pass   | 5.00         | 5.0000
+ telemetry_max_temperature_vehicle                    | pass   | 5.00         | 5.0000
+ telemetry_min_temperature_coldroom                   | pass   | 3.00         | 3.0000
+ telemetry_min_temperature_vehicle                    | pass   | 3.00         | 3.0000
+ telemetry_reading_count_coldroom                     | pass   | 87439552     | 87439552
+ telemetry_reading_count_vehicle                      | pass   | 1689502      | 1689502
+(8 rows)
+
+  section  | last_successful_cutoff |  safe_through_cutoff   
+-----------+------------------------+------------------------
+ WATERMARK | 2026-09-16 00:00:00+00 | 2026-09-16 00:00:00+00
+(1 row)
+
+    section    | all_active | quality_active 
+---------------+------------+----------------
+ ACTIVE_ALERTS |          0 |              0
+(1 row)
+
+
+=== AIRFLOW FULL QUALITY RUN ===
+supply_chain_quality_gate  phase10_full_airflow_proof_20260917  success  2026-09-17T13:59:50.477268+00:00                  2026-09-17T13:59:51.049607+00:00  2026-09-17T14:00:16.621111+00:00
+
+dag_id                    | logical_date | task_id          | state   | start_date                       | end_date                        
+==========================+==============+==================+=========+==================================+=================================
+supply_chain_quality_gate |              | run_quality_gate | success | 2026-09-17T13:59:51.344631+00:00 | 2026-09-17T14:00:16.247929+00:00
+                                                                                                                                           
+
+=== BROKER ===
+Msg 156, Level 15, State 1, Server c1101b151357, Line 1
+Incorrect syntax near the keyword 'SET'.
+
+=== RUNTIME ===
+airflow-api-server      Up 4 hours (healthy)
+airflow-dag-processor   Up 3 minutes (healthy)
+airflow-scheduler       Up 4 hours (healthy)
+realtime-api            Up 2 hours (healthy)
+realtime-consumer       Up About an hour
+warehouse-db            Up 4 hours (healthy)
+wwi-sqlserver           Up 4 hours (healthy)

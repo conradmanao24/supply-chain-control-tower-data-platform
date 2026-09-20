@@ -1,0 +1,19 @@
+﻿TEMPORARY PROOF CONFIG: stale=3s, offline=6s, warning high=5, critical high=6
+T+2s:
+{"rule_id":"coldroom.temperature_critical","severity":"critical","status":"open","observed_value":{"age_seconds":0.168,"temperature":7.0,"reading_count":1,"recorded_when":"2026-09-17T11:48:24.474055+00:00"},"threshold_value":{"low":null,"high":6}}
+T+5s:
+[{"rule_id":"coldroom.temperature_critical","severity":"critical","status":"open","observed_value":{"age_seconds":3.223,"temperature":7.0,"reading_count":1,"recorded_when":"2026-09-17T11:48:24.474055+00:00"},"threshold_value":{"low":null,"high":6}},{"rule_id":"coldroom.stale","severity":"warning","status":"open","observed_value":{"age_seconds":3.223,"temperature":7.0,"reading_count":1,"recorded_when":"2026-09-17T11:48:24.474055+00:00"},"threshold_value":{"seconds":3.0}}]
+T+8s:
+[{"rule_id":"coldroom.temperature_critical","severity":"critical","status":"open","observed_value":{"age_seconds":6.249,"temperature":7.0,"reading_count":1,"recorded_when":"2026-09-17T11:48:24.474055+00:00"},"threshold_value":{"low":null,"high":6}},{"rule_id":"coldroom.offline","severity":"critical","status":"open","observed_value":{"age_seconds":6.249,"temperature":7.0,"reading_count":1,"recorded_when":"2026-09-17T11:48:24.474055+00:00"},"threshold_value":{"seconds":6.0}}]
+DEADLINE SCHEDULE:
+AFTER RESTORE + FRESH READING active synthetic alerts:
+[]
+CLEANUP: synthetic sensor, alerts, and active deadlines removed; production rule defaults restored.
+
+DEADLINE ROWS (verified after proof):
+DeadlineKey | EventType | Status | DueAtUtc | FiredAtUtc | CancelledAtUtc
+coldroom:999999:stale | deadline.coldroom.stale | fired | 2026-09-17 11:48:27.4740000 | 2026-09-17 11:48:27.6900237 | NULL
+coldroom:999999:offline | deadline.coldroom.offline | fired | 2026-09-17 11:48:30.4740000 | 2026-09-17 11:48:30.7203441 | NULL
+coldroom:999999:stale | deadline.coldroom.stale | cancelled | 2026-09-17 11:49:32.9950000 | NULL | 2026-09-17 11:48:35.3793358
+coldroom:999999:offline | deadline.coldroom.offline | cancelled | 2026-09-17 11:50:32.9950000 | NULL | 2026-09-17 11:48:35.3834129
+

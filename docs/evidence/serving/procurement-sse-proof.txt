@@ -1,0 +1,10 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: 44444444-4444-4444-4444-444444444444
+event: update
+data: {"event_id" : "44444444-4444-4444-4444-444444444444", "event_type" : "procurement.changed", "entity_type" : "purchase_order", "operation" : "UPDATE", "processing_result" : "phase11_procurement_sse_proof"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 0, "rule_id" : "procurement.overdue_under_received", "domain" : "procurement", "entity_type" : "purchase_order", "entity_id" : "phase11-proof", "severity" : "warning", "status" : "open"}
+

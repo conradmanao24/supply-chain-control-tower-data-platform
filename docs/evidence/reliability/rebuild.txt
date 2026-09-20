@@ -1,0 +1,41 @@
+reliability/recovery current-state rebuild proof
+UTC date: 2026-09-17
+
+Inventory proof entity before controlled deletion:
+stock_item_id=203
+stock_item_name=Tape dispenser (Black)
+quantity_on_hand=3
+last_stocktake_quantity=3
+reorder_level=20
+target_stock_level=30
+last_edited_when=2026-09-15 12:00:00
+
+The realtime projection row for stock_item 203 was deliberately deleted.
+
+Command:
+python /opt/airflow/src/realtime/rebuild.py --domain inventory
+
+Output:
+REBUILD_DOMAIN_PASS {"domain":"inventory","event_touched_deleted":0,"event_touched_refreshed":2,"final_count":227,"seeded":227}
+REBUILD_COMPLETE
+
+After rebuild:
+realtime.current_inventory_state count = 227
+stock_item 203 restored with quantity_on_hand=3, last_stocktake_quantity=3, reorder_level=20, target_stock_level=30, last_edited_when=2026-09-15 12:00:00
+
+Authoritative WWI source comparison for stock_item 203:
+StockItemID=203
+StockItemName=Tape dispenser (Black)
+QuantityOnHand=3
+LastStocktakeQuantity=3
+ReorderLevel=20
+TargetStockLevel=30
+LastEditedWhen=2026-09-15 12:00:00
+
+Sensor rebuild proof after filtering controlled Phase proof events:
+REBUILD_DOMAIN_PASS {"coldroom_seeded":4,"domain":"sensors","event_readings_applied":4,"final_count":6,"vehicle_seeded":2}
+current_sensor_state count = 6
+synthetic coldroom:999999 rows = 0
+
+Result: PASS
+The projection rebuild restored the intentionally removed inventory state to the authoritative source value. Sensor rebuild also reconstructed the six real projected sensors without resurrecting the prior synthetic proof sensor.

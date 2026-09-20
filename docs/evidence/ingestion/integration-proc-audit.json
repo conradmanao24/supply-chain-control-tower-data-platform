@@ -1,0 +1,502 @@
+[
+  {
+    "procedure": "Integration.GetCityUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI City ID",
+      "City",
+      "State Province",
+      "Country",
+      "Continent",
+      "Sales Territory",
+      "Region",
+      "Subregion",
+      "geography",
+      "Latest Recorded Population",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetCustomerUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI Customer ID",
+      "Customer",
+      "Bill To Customer",
+      "Category",
+      "Buying Group",
+      "Primary Contact",
+      "Postal Code",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetEmployeeUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI Employee ID",
+      "Employee",
+      "Preferred Name",
+      "Is Salesperson",
+      "Photo",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetMovementUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "Date Key",
+      "WWI Stock Item Transaction ID",
+      "WWI Invoice ID",
+      "WWI Purchase Order ID",
+      "Quantity",
+      "WWI Stock Item ID",
+      "WWI Customer ID",
+      "WWI Supplier ID",
+      "WWI Transaction Type ID",
+      "Transaction Occurred When"
+    ],
+    "row_count": 216,
+    "sample_row": [
+      "2026-09-14",
+      "1481043",
+      null,
+      "8367",
+      "193836",
+      "77",
+      null,
+      "4",
+      "11",
+      "2026-09-14 07:00:00"
+    ]
+  },
+  {
+    "procedure": "Integration.GetOrderUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "Order Date Key",
+      "Picked Date Key",
+      "WWI Order ID",
+      "WWI Backorder ID",
+      "Description",
+      "Package",
+      "Quantity",
+      "Unit Price",
+      "Tax Rate",
+      "Total Excluding Tax",
+      "Tax Amount",
+      "Total Including Tax",
+      "WWI City ID",
+      "WWI Customer ID",
+      "WWI Stock Item ID",
+      "WWI Salesperson ID",
+      "WWI Picker ID",
+      "Last Modified When"
+    ],
+    "row_count": 207,
+    "sample_row": [
+      "2021-05-04",
+      "2026-09-14",
+      "191518",
+      null,
+      "\"The Gu\" red shirt XML tag t-shirt (White) 5XL",
+      "Each",
+      "60",
+      "18.00",
+      "15.000",
+      "1080.00",
+      "162.000000",
+      "1242.000000",
+      "20901",
+      "153",
+      "86",
+      "6",
+      "19",
+      "2026-09-14 11:00:00"
+    ]
+  },
+  {
+    "procedure": "Integration.GetPaymentMethodUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI Payment Method ID",
+      "Payment Method",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetPurchaseUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "Date Key",
+      "WWI Purchase Order ID",
+      "Ordered Outers",
+      "Ordered Quantity",
+      "Received Outers",
+      "Package",
+      "Is Order Finalized",
+      "WWI Supplier ID",
+      "WWI Stock Item ID",
+      "Last Modified When"
+    ],
+    "row_count": 15,
+    "sample_row": [
+      "2026-09-11",
+      "8367",
+      "16153",
+      "193836",
+      "16153",
+      "Carton",
+      "True",
+      "4",
+      "77",
+      "2026-09-14 07:00:00"
+    ]
+  },
+  {
+    "procedure": "Integration.GetSaleUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "Invoice Date Key",
+      "Delivery Date Key",
+      "WWI Invoice ID",
+      "Description",
+      "Package",
+      "Quantity",
+      "Unit Price",
+      "Tax Rate",
+      "Total Excluding Tax",
+      "Tax Amount",
+      "Profit",
+      "Total Including Tax",
+      "Total Dry Items",
+      "Total Chiller Items",
+      "WWI City ID",
+      "WWI Customer ID",
+      "WWI Bill To Customer ID",
+      "WWI Stock Item ID",
+      "WWI Saleperson ID",
+      "Last Modified When"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetStockHoldingUpdates",
+    "parameters": [],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "Quantity On Hand",
+      "Bin Location",
+      "Last Stocktake Quantity",
+      "Last Cost Price",
+      "Reorder Level",
+      "Target Stock Level",
+      "WWI Stock Item ID"
+    ],
+    "row_count": 227,
+    "sample_row": [
+      "710771",
+      "L-1",
+      "704303",
+      "9.50",
+      "20",
+      "100",
+      "1"
+    ]
+  },
+  {
+    "procedure": "Integration.GetStockItemUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI Stock Item ID",
+      "Stock Item",
+      "Color",
+      "Selling Package",
+      "Buying Package",
+      "Brand",
+      "Size",
+      "Lead Time Days",
+      "Quantity Per Outer",
+      "Is Chiller Stock",
+      "Barcode",
+      "Tax Rate",
+      "Unit Price",
+      "Recommended Retail Price",
+      "Typical Weight Per Unit",
+      "Photo",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetSupplierUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI Supplier ID",
+      "Supplier",
+      "Category",
+      "Primary Contact",
+      "Supplier Reference",
+      "Payment Days",
+      "Postal Code",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetTransactionTypeUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "WWI Transaction Type ID",
+      "Transaction Type",
+      "Valid From",
+      "Valid To"
+    ],
+    "row_count": 0,
+    "sample_row": null
+  },
+  {
+    "procedure": "Integration.GetTransactionUpdates",
+    "parameters": [
+      {
+        "id": 1,
+        "name": "@LastCutoff",
+        "type": "datetime2"
+      },
+      {
+        "id": 2,
+        "name": "@NewCutoff",
+        "type": "datetime2"
+      }
+    ],
+    "window": {
+      "last_cutoff": "2026-09-14T00:00:00",
+      "new_cutoff": "2026-09-15T00:00:00"
+    },
+    "columns": [
+      "Date Key",
+      "WWI Customer Transaction ID",
+      "WWI Supplier Transaction ID",
+      "WWI Invoice ID",
+      "WWI Purchase Order ID",
+      "Supplier Invoice Number",
+      "Total Excluding Tax",
+      "Tax Amount",
+      "Total Including Tax",
+      "Outstanding Balance",
+      "Is Finalized",
+      "WWI Customer ID",
+      "WWI Bill To Customer ID",
+      "WWI Supplier ID",
+      "WWI Transaction Type ID",
+      "WWI Payment Method ID",
+      "Last Modified When"
+    ],
+    "row_count": 14,
+    "sample_row": [
+      "2026-09-08",
+      null,
+      "1478953",
+      null,
+      "8359",
+      "3019",
+      "7706052.00",
+      "1155907.80",
+      "8861959.80",
+      "0.00",
+      "True",
+      null,
+      null,
+      "4",
+      "5",
+      "4",
+      "2026-09-14 09:00:00"
+    ]
+  }
+]

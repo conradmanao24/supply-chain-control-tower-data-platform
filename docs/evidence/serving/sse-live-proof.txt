@@ -1,0 +1,11 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 59, "rule_id" : "platform.data_quality_failed", "entity_type" : "platform", "entity_id" : "phase11_sse_refresh_proof", "severity" : "critical", "status" : "open", "opened_at" : "2026-09-17T15:56:54.112757+00:00", "last_observed_at" : "2026-09-17T15:56:54.112757+00:00", "resolved_at" : null}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 59, "rule_id" : "platform.data_quality_failed", "entity_type" : "platform", "entity_id" : "phase11_sse_refresh_proof", "severity" : "critical", "status" : "resolved", "opened_at" : "2026-09-17T15:56:54.112757+00:00", "last_observed_at" : "2026-09-17T15:56:55.105215+00:00", "resolved_at" : "2026-09-17T15:56:55.105215+00:00"}
+
+
+RESULT open=opened during_active=1 close=resolved after_active=0

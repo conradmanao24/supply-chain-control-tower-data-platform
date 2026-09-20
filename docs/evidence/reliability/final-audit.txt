@@ -1,0 +1,34 @@
+reliability/recovery final audit
+UTC date: 2026-09-17
+
+RUNTIME
+- wwi-sqlserver: healthy
+- warehouse-db: healthy
+- airflow-api-server: healthy
+- airflow-scheduler: healthy
+- realtime-api: healthy
+- realtime-consumer: running
+
+POSTGRES
+phase8_event_rows = 0
+active_alerts = 0
+duplicate_active_groups = 0
+inventory_projection_rows = 227
+sensor_projection_rows = 6
+synthetic_sensor_rows = 0
+
+SERVICE BROKER
+IngressQueue = 0
+ConsumerQueue = 0
+TransmissionQueue = 0
+UnreplayedDeadLetters = 0
+ScheduledDeadlines = 0
+
+PERMISSION RECOVERY
+sct_event_consumer EXECUTE on ControlTower.GetInventoryCurrentState = GRANT
+
+API HEALTH
+{"status":"ok","database":"ok","sse_listener":"connected","subscribers":0,"listener_error":null}
+
+Result: PASS
+All controlled reliability/recovery test artifacts were cleaned. Runtime queues are drained, no unreplayed dead letters remain, no synthetic sensor remains, and the realtime API/consumer stack is healthy.

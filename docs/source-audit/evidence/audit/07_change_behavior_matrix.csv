@@ -1,0 +1,32 @@
+source_table,phase0c_change_behavior,candidate_incremental_column,recommended_strategy,reason
+Application.Cities,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Application.Countries,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Application.DeliveryMethods,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Application.PaymentMethods,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Application.People,mutable master,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal master table
+Application.StateProvinces,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Application.SystemParameters,mutable configuration,LastEditedWhen,timestamp watermark plus merge/upsert,Current configuration row exposes LastEditedWhen
+Application.TransactionTypes,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Purchasing.PurchaseOrderLines,mutable transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Operational line exposes LastEditedWhen and receipt-state date
+Purchasing.PurchaseOrders,mutable transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Operational order can change after creation and exposes LastEditedWhen
+Purchasing.SupplierCategories,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Purchasing.Suppliers,mutable master,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal master table
+Purchasing.SupplierTransactions,append-heavy transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Transaction-like table with LastEditedWhen; simulation must confirm whether updates occur
+Sales.BuyingGroups,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Sales.CustomerCategories,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Sales.Customers,mutable master,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal master table with CustomerID PK and ValidFrom/ValidTo history
+Sales.CustomerTransactions,append-heavy transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Financial transaction table with LastEditedWhen; simulation must confirm update behavior
+Sales.InvoiceLines,append-heavy transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Invoice-line table with LastEditedWhen; safer than append-only before simulation proof
+Sales.Invoices,append-heavy transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Invoice-like table with LastEditedWhen; safer than append-only before simulation proof
+Sales.OrderLines,mutable transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Order-line fulfillment fields can change and table exposes LastEditedWhen
+Sales.Orders,mutable transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Order lifecycle fields can change and table exposes LastEditedWhen
+Sales.SpecialDeals,mutable reference/business rule,LastEditedWhen,timestamp watermark plus merge/upsert,Date-bounded deal configuration exposes LastEditedWhen
+Warehouse.ColdRoomTemperatures,mutable temporal telemetry,ValidFrom,temporal watermark plus merge/upsert,System-versioned current telemetry table with large archive history
+Warehouse.Colors,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Warehouse.PackageTypes,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Warehouse.StockGroups,mutable reference,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal reference table
+Warehouse.StockItemHoldings,mutable current state,LastEditedWhen,timestamp watermark plus merge/upsert,One current holding row per StockItemID and values are expected to update in place
+Warehouse.StockItems,mutable master,ValidFrom,temporal watermark plus merge/upsert,System-versioned temporal master table with StockItemID PK and ValidFrom/ValidTo history
+Warehouse.StockItemStockGroups,mutable bridge,LastEditedWhen,timestamp watermark plus merge/upsert,Bridge table exposes LastEditedWhen
+Warehouse.StockItemTransactions,append-heavy transaction,LastEditedWhen,timestamp watermark plus merge/upsert,Inventory movement table with LastEditedWhen and TransactionOccurredWhen
+Warehouse.VehicleTemperatures,append-heavy telemetry,RecordedWhen,recorded-time watermark plus key deduplication,Telemetry table has RecordedWhen and an identity VehicleTemperatureID but no LastEditedWhen

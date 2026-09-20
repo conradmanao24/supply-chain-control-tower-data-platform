@@ -1,0 +1,10 @@
+event: ready
+data: {"status":"connected","channel":"control_tower_realtime"}
+
+id: 11111111-1111-1111-1111-111111111111
+event: update
+data: {"event_id" : "11111111-1111-1111-1111-111111111111", "event_type" : "order.changed", "entity_type" : "order", "operation" : "UPDATE", "processing_result" : "phase11_fulfillment_sse_proof", "occurred_at_utc" : "2026-09-17T16:11:40.286199+00:00", "processed_at" : "2026-09-17T16:11:40.286199+00:00"}
+
+event: alert
+data: {"event_kind" : "alert", "alert_id" : 0, "rule_id" : "fulfillment.overdue", "domain" : "fulfillment", "entity_type" : "order", "entity_id" : "phase11-proof", "severity" : "warning", "status" : "open"}
+

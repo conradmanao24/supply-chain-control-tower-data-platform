@@ -1,0 +1,13 @@
+=== BACKFILL BASELINE ===
+watermark|2026-09-16 00:00:00+00
+guard|FREE|
+alerts|0
+order_lines|1009327
+sales_lines|993477
+inventory_movements|1028716
+purchase_lines|35089
+delivery_events|616062
+customer_tx|443041
+supplier_tx|9812
+coldroom_5m|4519296
+vehicle_5m|844776

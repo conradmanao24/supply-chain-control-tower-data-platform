@@ -1,0 +1,10 @@
+procedure_name                                                                                                                   execution_count     
+-------------------------------------------------------------------------------------------------------------------------------- --------------------
+GetDeliveryCurrentState                                                                                                                             1
+GetInventoryCurrentState                                                                                                                            2
+GetOrderCurrentState                                                                                                                                4
+GetProcurementCurrentState                                                                                                                          1
+login_name                                                                                                                       status                         command                          wait_type                                                    wait_time  
+-------------------------------------------------------------------------------------------------------------------------------- ------------------------------ -------------------------------- ------------------------------------------------------------ -----------
+sct_event_consumer                                                                                                               suspended                      DELETE                           BROKER_RECEIVE_WAITFOR                                              8821
+10|2026-09-17 11:20:48.271236+00
