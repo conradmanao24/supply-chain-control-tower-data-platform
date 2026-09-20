@@ -92,7 +92,8 @@ Write-Host "  $url"
 Write-Host "Target:"
 Write-Host "  $target"
 Write-Host ''
-Write-Host 'This download is approximately 1.55 GiB.'
+$expectedGiB = [math]::Round($expectedBytes / 1GB, 3)
+Write-Host "Expected download size: $expectedGiB GiB ($expectedBytes bytes)."
 
 $curl = Get-Command curl.exe -ErrorAction SilentlyContinue
 if ($null -ne $curl) {

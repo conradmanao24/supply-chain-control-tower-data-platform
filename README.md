@@ -232,6 +232,8 @@ data/baselines/full-master/wwi-full-master-2026-09-15.bak
 
 The baseline is intentionally excluded from Git history because of its size. The full bootstrap downloads it automatically from the project's `v1.0-data-baseline` GitHub Release when it is not already present, then validates its size, SQL Server backup signature, and SHA-256 before restore.
 
+Baseline release: [v1.0-data-baseline](https://github.com/conradmanao24/supply-chain-control-tower-data-platform/releases/tag/v1.0-data-baseline)
+
 Run:
 
 ```powershell

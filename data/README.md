@@ -31,7 +31,7 @@ Pinned verification:
 
 The file is intentionally excluded from Git history because of its size. It is distributed as the GitHub Release asset:
 
-`v1.0-data-baseline / wwi-full-master-2026-09-15.bak`
+[`v1.0-data-baseline / wwi-full-master-2026-09-15.bak`](https://github.com/conradmanao24/supply-chain-control-tower-data-platform/releases/tag/v1.0-data-baseline)
 
 `scripts/bootstrap/bootstrap-platform.ps1` downloads and validates this release asset automatically when the local baseline is missing.
 
